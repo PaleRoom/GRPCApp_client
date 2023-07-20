@@ -1,0 +1,21 @@
+syntax = "proto3";
+package com.example.grpc;
+
+message HelloRequest {      //тип запроса
+  string name = 1;
+  repeated string hobbies = 2; //список из строк
+}
+
+message HelloResponse {     //тип ответа
+  string greeting = 1;
+}
+//сервис, имеющий здесь один метод greeting с реквестом и респонсом
+//stream обеспечивает потоковую передачу(указана) или потоковый прием(не указан)
+service GreetingService {
+  rpc greeting(HelloRequest) returns (stream HelloResponse);
+  rpc streaming(HelloRequest) returns (stream HelloResponse);
+}
+
+//service StreamOverloadingService {
+//  rpc streaming(stream HelloRequest) returns(HelloResponse);
+//}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package com.example.grpc;
+
+message DownloadRequest {//тип запроса
+  string  requestPayload = 1;
+}
+
+message DownloadResponse {//тип ответа
+  bytes  filePayload = 1;
+  int32  size = 2;
+}
+
+//сервис, имеющий здесь один метод downloadFile с реквестом и респонсом в виде потока с файлом
+service DownloadService {
+  rpc downloadFile(DownloadRequest) returns (stream DownloadResponse);
+}
